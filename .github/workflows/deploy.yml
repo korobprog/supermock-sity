@@ -37,7 +37,15 @@ jobs:
           ${{ runner.os }}-pnpm-store-
           
     - name: Install dependencies
-      run: pnpm install --frozen-lockfile
+      run: |
+        # Проверяем наличие lockfile
+        if [ -f "pnpm-lock.yaml" ]; then
+          echo "pnpm-lock.yaml найден, используем --frozen-lockfile"
+          pnpm install --frozen-lockfile
+        else
+          echo "pnpm-lock.yaml не найден, устанавливаем без --frozen-lockfile"
+          pnpm install
+        fi
       
     - name: Build application
       run: pnpm run build
