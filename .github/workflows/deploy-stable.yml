@@ -1,4 +1,4 @@
-name: Deploy SuperMock Site to Production
+name: Deploy SuperMock Site to Production (Stable)
 
 on:
   push:
@@ -23,40 +23,27 @@ jobs:
       with:
         version: 8
         
-    - name: Get pnpm store directory
-      shell: bash
+    - name: Debug environment
       run: |
-        echo "STORE_PATH=$(pnpm store path --silent)" >> $GITHUB_ENV
-        
-    - name: Setup pnpm cache
-      uses: actions/cache@v4
-      with:
-        path: ${{ env.STORE_PATH }}
-        key: ${{ runner.os }}-pnpm-store-${{ hashFiles('**/pnpm-lock.yaml') }}
-        restore-keys: |
-          ${{ runner.os }}-pnpm-store-
-          
-    - name: Debug file structure
-      run: |
+        echo "Node version: $(node --version)"
+        echo "pnpm version: $(pnpm --version)"
         echo "Current directory: $(pwd)"
-        echo "Files in current directory:"
+        echo "Files:"
         ls -la
-        echo "pnpm-lock.yaml exists: $(test -f pnpm-lock.yaml && echo 'YES' || echo 'NO')"
-        echo "pnpm-lock.yaml size: $(wc -c < pnpm-lock.yaml 2>/dev/null || echo '0')"
+        echo "package.json exists: $(test -f package.json && echo 'YES' || echo 'NO')"
         
-    - name: Install dependencies
+    - name: Install dependencies (fallback method)
       run: |
-        # Проверяем наличие lockfile и его валидность
-        if [ -f "pnpm-lock.yaml" ] && [ -s "pnpm-lock.yaml" ]; then
-          echo "pnpm-lock.yaml найден и не пустой, пытаемся использовать --frozen-lockfile"
-          pnpm install --frozen-lockfile || {
-            echo "Ошибка с --frozen-lockfile, пробуем без него"
+        # Пробуем разные методы установки
+        echo "Попытка 1: Установка с --frozen-lockfile"
+        pnpm install --frozen-lockfile || {
+          echo "Попытка 1 не удалась, попытка 2: Установка без --frozen-lockfile"
+          pnpm install || {
+            echo "Попытка 2 не удалась, попытка 3: Очистка кэша и установка"
+            pnpm store prune
             pnpm install
           }
-        else
-          echo "pnpm-lock.yaml отсутствует или пустой, устанавливаем без --frozen-lockfile"
-          pnpm install
-        fi
+        }
       
     - name: Build application
       run: pnpm run build
