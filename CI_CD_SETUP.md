@@ -1,5 +1,5 @@
 # Настройка CI/CD для автоматического деплоя
-
+попробуем 1
 ## Что было настроено
 
 1. **GitHub Actions Workflow** (`.github/workflows/deploy.yml`)
