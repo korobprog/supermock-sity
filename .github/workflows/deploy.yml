@@ -90,11 +90,16 @@ jobs:
           # Собираем Docker образ
           docker build -t supermock-ai-interview:latest .
           
-          # Запускаем контейнер на порту 3000
+          # Запускаем контейнер с Traefik labels
           docker run -d \
             --name supermock-ai-interview \
             --restart unless-stopped \
-            -p 3000:80 \
+            --network traefik-network \
+            -l 'traefik.enable=true' \
+            -l 'traefik.http.routers.supermock.rule=Host("supermock.ru") || Host("www.supermock.ru")' \
+            -l 'traefik.http.routers.supermock.entrypoints=websecure' \
+            -l 'traefik.http.routers.supermock.tls.certresolver=letsencrypt' \
+            -l 'traefik.http.services.supermock.loadbalancer.server.port=80' \
             supermock-ai-interview:latest
             
           # Очищаем неиспользуемые образы
@@ -102,5 +107,5 @@ jobs:
           
     - name: Health check
       run: |
-        sleep 10
-        curl -f http://${{ secrets.SERVER_HOST }}:3000 || exit 1
+        sleep 15
+        curl -f https://supermock.ru || exit 1
