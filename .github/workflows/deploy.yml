@@ -8,6 +8,7 @@ on:
 jobs:
   deploy:
     runs-on: ubuntu-latest
+    environment: supermock  # Добавляем Environment
     
     steps:
     - name: Checkout code
