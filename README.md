@@ -1,74 +1,109 @@
-# Welcome to your SuperMock project
+# 🌐 SuperMock Site - AI Interview Platform Landing
 
-## Project info
+Современный лендинг для AI-платформы подготовки к собеседованиям SuperMock.
 
-**URL**: https://lovable.dev/projects/f039fb10-9c36-4450-a3dd-9415b264c2da
+## 🚀 Быстрый старт
 
-## How can I edit this code?
-
-There are several ways of editing your application.
-
-**Use Lovable**
-
-Simply visit the [Lovable Project](https://lovable.dev/projects/f039fb10-9c36-4450-a3dd-9415b264c2da) and start prompting.
-
-Changes made via Lovable will be committed automatically to this repo.
-
-**Use your preferred IDE**
-
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
-
-The only requirement is having Node.js & pnpm installed - [install pnpm](https://pnpm.io/installation)
-
-Follow these steps:
-
-```sh
-# Step 1: Clone the repository using the project's Git URL.
-git clone <YOUR_GIT_URL>
-
-# Step 2: Navigate to the project directory.
-cd <YOUR_PROJECT_NAME>
-
-# Step 3: Install the necessary dependencies.
+### Локальная разработка
+```bash
+# Установка зависимостей
 pnpm install
 
-# Step 4: Start the development server with auto-reloading and an instant preview.
+# Запуск dev сервера
 pnpm dev
+
+# Сборка
+pnpm build
 ```
 
-**Edit a file directly in GitHub**
+### Деплой
+```bash
+# Production
+pnpm run deploy:production
 
-- Navigate to the desired file(s).
-- Click the "Edit" button (pencil icon) at the top right of the file view.
-- Make your changes and commit the changes.
+# Staging
+pnpm run deploy:staging
+```
 
-**Use GitHub Codespaces**
+## 🌐 Демо
 
-- Navigate to the main page of your repository.
-- Click on the "Code" button (green button) near the top right.
-- Select the "Codespaces" tab.
-- Click on "New codespace" to launch a new Codespace environment.
-- Edit files directly within the Codespace and commit and push your changes once you're done.
+- **Production**: http://217.198.6.238:3000
+- **Staging**: http://217.198.6.238:8080
 
-## What technologies are used for this project?
+## 🎯 Возможности
 
-This project is built with:
+- **6 языков**: English, Russian, Spanish, French, German, Chinese
+- **10+ профессий**: Frontend, Backend, DevOps, Data Science и др.
+- **AI-анализ**: Умная оценка навыков
+- **WebRTC**: Видеозвонки в реальном времени
+- **Персонализированная обратная связь**
 
-- Vite
-- TypeScript
-- React
-- shadcn-ui
-- Tailwind CSS
-- pnpm (package manager)
+## 🛠️ Технологии
 
-## How can I deploy this project?
+- **React 18** + **TypeScript**
+- **Vite** - быстрая сборка
+- **Tailwind CSS** - стилизация
+- **Shadcn/ui** - компоненты
+- **React Router** - маршрутизация
+- **Docker** - контейнеризация
+- **Nginx** - веб-сервер
 
-Simply open [Lovable](https://lovable.dev/projects/f039fb10-9c36-4450-a3dd-9415b264c2da) and click on Share -> Publish.
+## 📁 Структура проекта
 
-## Can I connect a custom domain to my Lovable project?
+```
+src/
+├── components/          # React компоненты
+│   ├── ui/             # UI компоненты (shadcn/ui)
+│   ├── HeroSection.tsx # Главная секция
+│   ├── Footer.tsx      # Подвал
+│   └── ...
+├── pages/              # Страницы приложения
+│   ├── Index.tsx       # Главная страница
+│   ├── Features.tsx    # Возможности
+│   ├── Pricing.tsx     # Цены
+│   └── ...
+├── assets/             # Статические ресурсы
+└── lib/                # Утилиты
+```
 
-Yes, you can!
+## 🔧 CI/CD
 
-To connect a domain, navigate to Project > Settings > Domains and click Connect Domain.
+- **GitHub Actions** для автоматического деплоя
+- **Docker** контейнеризация
+- **Production** и **Staging** окружения
+- **Health checks** и мониторинг
 
-Read more here: [Setting up a custom domain](https://docs.lovable.dev/tips-tricks/custom-domain#step-by-step-guide)
+## 📚 Документация
+
+- [CI/CD Setup](CI_CD_SETUP.md) - Настройка автоматического деплоя
+- [Deployment Guide](DEPLOYMENT_GUIDE.md) - Руководство по деплою
+- [Instructions](INSTRUCTIONS_README.md) - Инструкции по использованию
+
+## 🎨 Дизайн
+
+- Современный минималистичный дизайн
+- Адаптивная верстка
+- Градиенты и анимации
+- Оптимизация для мобильных устройств
+
+## 📊 Статистика
+
+- 10+ технических профессий
+- 6 языков программирования
+- 1000+ проведенных собеседований
+- 87% успешность кандидатов
+
+## 🔗 Ссылки
+
+- **Основное приложение**: https://app.supermock.ru
+- **Документация**: /documentation
+- **FAQ**: /faq
+- **Поддержка**: /support
+
+## 📄 Лицензия
+
+MIT License
+
+---
+
+**SuperMock** - подготовьтесь к собеседованию с AI! 🚀

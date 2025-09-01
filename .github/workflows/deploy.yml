@@ -1,4 +1,4 @@
-name: Deploy to Production
+name: Deploy SuperMock Site to Production
 
 on:
   push:
