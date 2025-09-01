@@ -32,14 +32,62 @@ root
 
 ### SERVER_SSH_KEY
 Содержимое вашего SSH ключа `~/.ssh/timeweb_vps_key`:
-```bash
-cat ~/.ssh/timeweb_vps_key
+```
+-----BEGIN OPENSSH PRIVATE KEY-----
+b3BlbnNzaC1rZXktdjEAAAAABG5vbmUAAAAEbm9uZQAAAAAAAAABAAABFwAAAAdzc2gtcn
+NhAAAAAwEAAQAAAQEAz9Kgwy4tVwhxINBoMmKK+8NGiq9U9f+PIp8nPMpwHEeCAO1RUFTs
+DkQU9fU+Yy6rJEn/jAZEDGSF70PZhIuTDRiuMID7CvikeBrcOBRHrvtNUS3bDg7ljHHgyK
+HDS/mQO2Q6a70HE3kXcBetwK8RE5+Zr3Dc0n/R+BGKzg1Mo36GgiJjRI4mR3w28sFglAWx
+pLWkOmvhTiRtNnrHW/HCTIXK26/O6GWNdcKTkuwsELgZWcwU8Th16/vvoM9tPGK+0mWh/Q
+mLpL1WbN4oolxhv1PLGRzizoiIspwitwt9vWMMtu8+MAR12NOFCS/hvW5Sz5TCC/Ev7nVF
+N4bPgNklpwAAA9jXtzDY17cw2AAAAAdzc2gtcnNhAAABAQDP0qDDLi1XCHEg0GgyYor7w0
+aKr1T1/48inyc8ynAcR4IA7VFQVOwORBT19T5jLqskSf+MBkQMZIXvQ9mEi5MNGK4wgPsK
++KR4Gtw4FEeu+01RLdsODuWMceDIocNL+ZA7ZDprvQcTeRdwF63ArxETn5mvcNzSf9H4EY
+rODUyjfoaCImNEjiZHfDbywWCUBbGktaQ6a+FOJG02esdb8cJMhcrbr87oZY11wpOS7CwQ
+uBlZzBTxOHXr+++gz208Yr7SZaH9CYukvVZs3iiiXGG/U8sZHOLOiIiynCK3C329Ywy27z
+4wBHXY04UJL+G9blLPlMIL8S/udUU3hs+A2SWnAAAAAwEAAQAAAQAWC1SMKjtwTkVEYsw6
+qU3uyKw/N7vpCtOnANTLqPmIC7m+2W1/pOe+glBANWRfEZXhF+Goe7L/fDDiIVioVkR3O3
+/2myfbO7v5FXhN5oYitHtjZLF7Ze8ex6boAT39ssTZgpcufcg2COkzNapzlDOug4Zsyqmn
+FnHc62zFezmpjygUkVeuiqqwHf7P/r23qXS2w3ngWvE/QfK0HEH2MhcZNX1wrGExa6ohFa
+6rTrWTviPAae/HHZVpxLzUWxNSFhukDMxTV2cyseMdJ4pzDLMwkSmI+CrS/r0DNMS52124
+UVCTt8T+p5G633omcMSfF7luM2bv516EV1Ztkg6A7kwBAAAAgACciLOQ/L0DeRUyt9cy86
+eyYQfGsAMsfwyxfhzI6TtswKS72JPT4dVu1O37UMBrycTtHuJhd/aUTT0OrzukIjKobMnm
+rRFshCqK/2VD4YQRwCY+hs/N/JVYexnTc1FJmQb2BvLHvtV2zzLu5iJ79whawExZ+Cmpl6
+JbGUwALHzJAAAAgQD9f46rXa9T4YHp3/9mBopxA6dsyCX/O/dtpzsI/gNk91nZ0w4QUk8c
+vQnwlKqS4reTVzd76YT+4Xhh+WUh3ArETUm2+WmPxUy1DfBTbmXy8m1rURyhmuU73+9tNs
+13819pfknRkSnCHxzb5scy60JdZ+25bI3/mBZj7y8tzhmqAQAAAIEA0d+s3HMQtlU1iz9o
+K+Je3txvpWbgPxwi1fgLSfTaazR5KmoXbpuz4wNi2qlofZSiKGc/tR0oOEbwdjRvxNJQ0e
+U4YfsHrW4yopvs1B0An+2mSAk+F7e8SsyxQNnV+ADe9otbMbuedAy/curwrYyrO8gUolir
+u3N0vQmGPOtFP6cAAAAia29yb2Jwcm9nQGtvcm9icHJvZy1EZWZhdWx0LXN0cmluZwE=
+-----END OPENSSH PRIVATE KEY-----
 ```
 
 ### SERVER_PORT
 ```
 22
 ```
+
+## Настройка GitHub Environment
+
+### 1. Создайте Environment "supermock"
+1. Перейдите в **Settings** → **Environments**
+2. Нажмите **New environment**
+3. Введите имя: `supermock`
+4. Нажмите **Configure environment**
+
+### 2. Настройте Deployment protection rules
+- ✅ **Required reviewers**: ВКЛЮЧЕНО (добавьте себя)
+- ❌ **Wait timer**: ВЫКЛЮЧЕНО
+- ✅ **Allow administrators to bypass**: ВКЛЮЧЕНО
+
+### 3. Настройте Deployment branches
+- Измените с "No restriction" на "Selected branches and tags"
+- Введите: `main`
+
+### 4. Добавьте Environment secrets
+- `VITE_API_URL` = `https://api.supermock.ru`
+- `VITE_SITE_URL` = `https://supermock.ru`
+- `VITE_APP_ENV` = `production`
 
 ## Подготовка сервера
 
@@ -71,12 +119,12 @@ systemctl enable docker
 Если нужно запустить деплой вручную:
 
 1. Перейдите в **Actions** в GitHub репозитории
-2. Выберите workflow **Deploy to Production**
+2. Выберите workflow **Deploy SuperMock Site to Production**
 3. Нажмите **Run workflow**
 
 ## Мониторинг
 
-- Логи деплоя: GitHub Actions → Deploy to Production
+- Логи деплоя: GitHub Actions → Deploy SuperMock Site to Production
 - Статус контейнера на сервере: `docker ps`
 - Логи контейнера: `docker logs supermock-ai-interview`
 
