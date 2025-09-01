@@ -87,17 +87,14 @@ jobs:
         script: |
           cd /var/www/supermock-ai-interview
           
-          # Исправляем Dockerfile для корректного копирования файлов
-          sed -i 's|COPY Lading/supermock-ai-interview/|COPY .|g' Dockerfile
-          
           # Собираем Docker образ
           docker build -t supermock-ai-interview:latest .
           
-          # Запускаем контейнер
+          # Запускаем контейнер на порту 3000
           docker run -d \
             --name supermock-ai-interview \
             --restart unless-stopped \
-            -p 80:80 \
+            -p 3000:80 \
             supermock-ai-interview:latest
             
           # Очищаем неиспользуемые образы
@@ -106,4 +103,4 @@ jobs:
     - name: Health check
       run: |
         sleep 10
-        curl -f http://${{ secrets.SERVER_HOST }} || exit 1
+        curl -f http://${{ secrets.SERVER_HOST }}:3000 || exit 1
